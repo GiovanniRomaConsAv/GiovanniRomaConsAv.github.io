@@ -101,6 +101,38 @@
   .works p{font-size:1rem;line-height:1.55;color:var(--ink);margin:0}
   .works em{color:var(--cobalt)}
 
+  /* Credits viewer */
+  .credits{margin-top:26px;border-top:1px solid var(--cobalt-line);padding-top:22px}
+  .credits-title{font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt);font-weight:600;margin-bottom:14px}
+  .credits-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-family:var(--sans);font-size:.85rem;color:var(--muted)}
+  .credits-top select{
+    font-family:var(--sans);font-size:.88rem;color:var(--cobalt);background:var(--paper);
+    border:1px solid var(--cobalt);padding:7px 10px;border-radius:0;cursor:pointer;
+  }
+  .credit-card{
+    background:#fbfcff;border:1px solid var(--cobalt-line);padding:26px 28px 24px;min-height:15.5rem;
+    transition:opacity .15s ease;
+  }
+  .credit-card.swap{opacity:0}
+  .credit-card:focus{outline:2px solid var(--cobalt);outline-offset:2px}
+  .credit-card p{margin:0}
+  .cc-year{font-size:2.2rem;line-height:1;color:var(--cobalt);letter-spacing:-.01em}
+  .cc-artist{margin-top:14px;font-size:1.25rem;line-height:1.35;color:var(--ink)}
+  .cc-title{margin-top:2px;font-style:italic;font-size:1.15rem;line-height:1.4;color:var(--cobalt)}
+  .cc-meta{margin-top:14px;font-family:var(--sans);font-size:.84rem;line-height:1.5;color:var(--muted)}
+  .cc-role{margin-top:6px;font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt);font-weight:600}
+  .cc-note{margin-top:12px;font-size:.95rem;line-height:1.5;color:var(--muted)}
+  .cc-note:empty{display:none}
+  .credits-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+  .credits-nav button{
+    font-family:var(--sans);font-size:.85rem;letter-spacing:.04em;cursor:pointer;
+    padding:9px 16px;background:transparent;border:1px solid var(--cobalt);color:var(--cobalt);
+    transition:background .15s,color .15s;
+  }
+  .credits-nav button:hover:not(:disabled){background:var(--cobalt);color:#fff}
+  .credits-nav button:disabled{opacity:.35;cursor:default}
+  #credit-count{font-family:var(--sans);font-size:.8rem;color:var(--muted);letter-spacing:.06em}
+
   /* Contact */
   .links{list-style:none;display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
   .links a{
@@ -234,6 +266,27 @@
         <ul class="works">
           <li><span class="yr">2019–2025</span><p>Mastering, mixing and editing for national and international releases on labels including Sony Music, BMG, Columbia, Elefant Records, peermusic and Artist First, with gold and platinum certified credits.</p></li>
         </ul>
+
+        <div class="credits" id="credits" hidden>
+          <p class="credits-title">Selected credits, one at a time</p>
+          <div class="credits-top">
+            <label for="credit-year">Jump to year</label>
+            <select id="credit-year"></select>
+          </div>
+          <article class="credit-card" id="credit-card" aria-live="polite" tabindex="0">
+            <p class="cc-year" id="cc-year"></p>
+            <p class="cc-artist" id="cc-artist"></p>
+            <p class="cc-title" id="cc-title"></p>
+            <p class="cc-meta" id="cc-meta"></p>
+            <p class="cc-role" id="cc-role"></p>
+            <p class="cc-note" id="cc-note"></p>
+          </article>
+          <div class="credits-nav">
+            <button type="button" id="credit-prev" aria-label="Previous credit">&larr; Newer</button>
+            <span id="credit-count" aria-live="polite"></span>
+            <button type="button" id="credit-next" aria-label="Next credit">Older &rarr;</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -277,7 +330,69 @@
   <div class="wrap">© <span id="y">2026</span> Giovanni Roma</div>
 </footer>
 
+<script src="credits.js" charset="utf-8"></script>
 <script>
+  // Credits viewer: one credit at a time, newest first, with a jump-to-year menu.
+  (function(){
+    var all = (window.CREDITS || []), hide = (window.HIDE_ARTISTS || []).map(function(s){return s.toLowerCase();});
+    var list = all.filter(function(c){
+      var a = (c.artist || "").toLowerCase();
+      return !hide.some(function(h){ return a.indexOf(h) !== -1; });
+    });
+    var box = document.getElementById("credits");
+    if (!box || !list.length) return;
+    var i = 0;
+    var card = document.getElementById("credit-card");
+    var sel = document.getElementById("credit-year");
+    var prev = document.getElementById("credit-prev");
+    var next = document.getElementById("credit-next");
+    var count = document.getElementById("credit-count");
+    var el = {
+      y: document.getElementById("cc-year"), a: document.getElementById("cc-artist"),
+      t: document.getElementById("cc-title"), m: document.getElementById("cc-meta"),
+      r: document.getElementById("cc-role"), n: document.getElementById("cc-note")
+    };
+
+    var firstOfYear = {}, years = [];
+    list.forEach(function(c, k){
+      if (!(c.y in firstOfYear)) { firstOfYear[c.y] = k; years.push(c.y); }
+    });
+    years.forEach(function(y){
+      var o = document.createElement("option");
+      o.value = y; o.textContent = y; sel.appendChild(o);
+    });
+
+    function paint(){
+      var c = list[i];
+      el.y.textContent = c.y;
+      el.a.textContent = c.artist;
+      el.t.textContent = c.title;
+      el.m.textContent = [c.fmt, c.label].filter(Boolean).join("  ·  ");
+      el.r.textContent = c.roles.join(" · ");
+      el.n.textContent = c.note || "";
+      sel.value = c.y;
+      prev.disabled = (i === 0);
+      next.disabled = (i === list.length - 1);
+      count.textContent = (i + 1) + " / " + list.length;
+    }
+    function go(k){
+      if (k < 0 || k >= list.length || k === i) return;
+      i = k;
+      card.classList.add("swap");
+      setTimeout(function(){ paint(); card.classList.remove("swap"); }, 120);
+    }
+    prev.addEventListener("click", function(){ go(i - 1); });
+    next.addEventListener("click", function(){ go(i + 1); });
+    sel.addEventListener("change", function(){ go(firstOfYear[sel.value]); });
+    box.addEventListener("keydown", function(e){
+      if (e.target === sel) return;
+      if (e.key === "ArrowLeft") { go(i - 1); e.preventDefault(); }
+      if (e.key === "ArrowRight") { go(i + 1); e.preventDefault(); }
+    });
+    paint();
+    box.hidden = false;
+  })();
+
   // The address is assembled only on click: it never appears in full in the HTML source,
   // so crawlers that read the page without running scripts cannot harvest it.
   (function(){
