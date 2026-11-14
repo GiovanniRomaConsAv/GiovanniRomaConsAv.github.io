@@ -73,7 +73,7 @@
 
   /* Sections */
   section{padding:56px 0;border-top:1px solid var(--cobalt-line)}
-  h2{font-family:var(--sans);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--cobalt);margin-bottom:26px}
+  h2{font-family:var(--sans);font-size:.86rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#0A2A6B;margin-bottom:26px}
   p+p{margin-top:1.1em}
   h3{font-weight:400;font-style:italic;font-size:1.35rem;color:var(--cobalt);margin-bottom:6px}
 
@@ -89,7 +89,7 @@
   section.research{padding:44px 0}
   section.research h3{font-size:1.1rem}
   section.research p{font-size:.95rem;line-height:1.65;color:var(--muted);max-width:38em}
-  .research-grid{display:grid;grid-template-columns:190px 1fr;gap:36px;align-items:center}
+  .research-grid{display:grid;grid-template-columns:250px 1fr;gap:36px;align-items:center}
   .research-logo{width:100%;height:auto;display:block}
 
   /* Selected projects */
@@ -105,7 +105,7 @@
 
   /* Credits viewer */
   .credits{margin-top:26px;border-top:1px solid var(--cobalt-line);padding-top:22px}
-  .credits-title{font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt);font-weight:600;margin-bottom:14px}
+  .credits-title{font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#0A2A6B;font-weight:700;margin-bottom:14px}
   .credits-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-family:var(--sans);font-size:.85rem;color:var(--muted)}
   .credits-top select{
     font-family:var(--sans);font-size:.88rem;color:var(--cobalt);background:var(--paper);
@@ -307,6 +307,26 @@
     transition:transform .4s cubic-bezier(.16,1,.3,1),width .4s cubic-bezier(.16,1,.3,1),opacity .25s}
   .nav-ind.on{opacity:1}
   .nav-ind.snap{transition:none}
+
+  /* Education */
+  .edu{margin-top:30px;border-top:1px solid var(--cobalt-line);padding-top:20px}
+  .edu-title{font-family:var(--sans);font-size:.72rem!important;letter-spacing:.16em;text-transform:uppercase;color:#0A2A6B;font-weight:700;font-style:normal;margin-bottom:12px}
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  section.research .edu p{margin:0;max-width:none}
+  section.research .edu .edu-deg{font-size:1.02rem;color:var(--ink);line-height:1.4}
+  section.research .edu .edu-meta{font-family:var(--sans);font-size:.78rem;line-height:1.5;color:var(--muted);margin-top:3px}
+  section.research .edu .edu-th{font-size:.88rem;line-height:1.55;margin-top:8px}
+  @media (max-width:720px){.edu-grid{grid-template-columns:1fr;gap:22px}}
+
+  /* Ocra signal wave at the foot of every sheet */
+  .js .stage::before{content:"";position:absolute;right:64px;bottom:22px;width:64px;height:22px;pointer-events:none;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 22'%3E%3Cpath d='M3 11C10 0.5 20 0.5 32 11S54 21.5 61 11' fill='none' stroke='%23D49A2A' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
+  .js .panel{padding-bottom:52px}
+  @media (max-width:720px){
+    .js .stage{padding-bottom:50px}
+    .js .panel{padding-bottom:14px}
+    .js .stage::before{right:22px}
+  }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
   }
@@ -447,7 +467,23 @@
           <h3>Aural-IA</h3>
           <p>My doctoral project investigates computational strategies for the preservation of electroacoustic music: works whose technological apparatus ages faster than the score that documents them, and which therefore call for methods of reconstruction, documentation and transmission suited to their nature.</p>
           <p>Case studies draw on works by Harvey, Stockhausen and Boulez; the methods combine supervised geometric annotation of scores, human-in-the-loop workflows and retrieval-augmented generation.</p>
-          <p>Second-level Academic Diploma in Electronic Music (equivalent to a Master’s degree), 110/110 cum laude.</p>
+        </div>
+      </div>
+      <div class="edu">
+        <h3 class="edu-title">Education</h3>
+        <div class="edu-grid">
+          <article>
+            <p class="edu-deg">Master’s degree in Electronic Music</p>
+            <p class="edu-meta">Second-level Academic Diploma (DCSL34) · Conservatorio «D. Cimarosa», Avellino · 2022–2024</p>
+            <p class="edu-meta">110/110 cum laude, with special mention for academic career</p>
+            <p class="edu-th"><em>AuraLE: studio per un ambiente integrato per la progettazione e l’esecuzione di improvvisazioni elettroacustiche</em> (“AuraLE: a study for an integrated environment for the design and performance of electroacoustic improvisation”). Supervisor: Prof. A. F. Battista.</p>
+          </article>
+          <article>
+            <p class="edu-deg">Bachelor’s degree in Electronic Music</p>
+            <p class="edu-meta">First-level Academic Diploma (DCPL34) · Conservatorio «D. Cimarosa», Avellino · 2019–2022</p>
+            <p class="edu-meta">110/110 cum laude, with special mention for academic career</p>
+            <p class="edu-th"><em>El Aleph: studio per una composizione per pianoforte e live electronics in quadrifonia</em> (“El Aleph: a study for a composition for piano and live electronics in quadraphony”). Supervisor: Prof. A. F. Battista.</p>
+          </article>
         </div>
       </div>
     </section>
