@@ -284,7 +284,9 @@
   }
   .js .panel{padding:32px 64px 20px}
   .js .panel-images .gallery{max-width:min(600px,calc(clamp(520px,calc(100svh - 190px),700px) - 175px))}
-  .js .credit-card{min-height:10.5rem;padding:18px 26px 16px}
+  .js .credit-card{min-height:12.5rem;padding:18px 26px 16px}
+  @media (max-width:900px){.js .credit-card{min-height:14rem}}
+  @media (max-width:720px){.js .credit-card{min-height:20.5rem}}
   .js .panel-selected .credits{margin-top:14px;padding-top:14px}
   .js .panel-home{justify-content:center}
   @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
@@ -594,7 +596,7 @@
       if (!a) { ind.classList.remove("on"); return; }
       if (snap) ind.classList.add("snap");
       ind.style.width = a.offsetWidth + "px";
-      ind.style.transform = "translateX(" + a.offsetLeft + "px)";
+      ind.style.transform = "translateX(" + (a.getBoundingClientRect().left - navEl.getBoundingClientRect().left) + "px)";
       ind.classList.add("on");
       if (snap) { void ind.offsetWidth; ind.classList.remove("snap"); }
     }
@@ -603,7 +605,7 @@
       var cur = navEl.querySelector('[aria-current="page"]');
       moveTo(cur, !wasOn && !!cur); wasOn = !!cur;
     }
-    links.forEach(function(a){
+    [].slice.call(navEl.querySelectorAll("a")).forEach(function(a){
       a.addEventListener("mouseenter", function(){ moveTo(a, !wasOn); wasOn = true; });
       a.addEventListener("focus", function(){ moveTo(a, !wasOn); wasOn = true; });
       a.addEventListener("blur", rest);
