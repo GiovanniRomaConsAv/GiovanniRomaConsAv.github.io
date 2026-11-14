@@ -263,35 +263,39 @@
   .works li:nth-child(4),.links li:nth-child(4),.slot:nth-child(4){--i:3}
   .credit-card.swap{animation:itemIn .3s cubic-bezier(.16,1,.3,1) both}
 
-  /* ===== Glass effect ===== */
+  /* ===== Variant C: sober background on every tab, glass menu and glass central panel ===== */
   .js body::before{
-    content:"";position:fixed;left:0;right:0;top:0;z-index:-1;pointer-events:none;
-    background:url(images/hero-bg.jpg) center 40%/cover no-repeat;
-    opacity:0;transition:opacity .6s cubic-bezier(.16,1,.3,1);
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:url(images/bg-sober.jpg) center/cover no-repeat;
   }
-  .js body.is-home::before{opacity:1}
   .js .hero-img{display:none}
   .js header.top,.js footer{
-    background:rgba(241,245,252,.55);
-    -webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
-    transition:background .4s;
+    background:rgba(241,245,252,.5);
+    -webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);
+    border-color:rgba(185,203,232,.7);
   }
-  .js header.top{border-bottom-color:rgba(185,203,232,.7)}
-  .js footer{border-top-color:rgba(185,203,232,.7)}
+  .js .stage{
+    max-width:980px;width:calc(100% - 32px);
+    height:clamp(520px,calc(100svh - 190px),700px);
+    background:rgba(241,245,252,.62);
+    -webkit-backdrop-filter:blur(22px) saturate(1.4);backdrop-filter:blur(22px) saturate(1.4);
+    border:1px solid rgba(255,255,255,.65);border-radius:14px;
+    box-shadow:0 10px 40px rgba(0,30,80,.12), inset 0 1px 0 rgba(255,255,255,.7);
+  }
+  .js .panel{padding:32px 64px 20px}
+  .js .panel-images .gallery{max-width:min(600px,calc(clamp(520px,calc(100svh - 190px),700px) - 175px))}
+  .js .credit-card{min-height:10.5rem;padding:18px 26px 16px}
+  .js .panel-selected .credits{margin-top:14px;padding-top:14px}
+  .js .panel-home{justify-content:center}
   @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-    .js header.top,.js footer,.js .panel-home .hero{background:rgba(241,245,252,.92)}
+    .js header.top,.js footer,.js .stage{background:rgba(241,245,252,.93)}
   }
   @media (prefers-reduced-transparency:reduce){
-    .js header.top,.js footer,.js .panel-home .hero{background:var(--paper);-webkit-backdrop-filter:none;backdrop-filter:none}
+    .js header.top,.js footer,.js .stage{background:var(--paper);-webkit-backdrop-filter:none;backdrop-filter:none}
   }
-
-  /* Variant B: image band at the top of Home, glass menu bar over it */
-  .js body::before{height:58svh;
-    -webkit-mask-image:linear-gradient(#000 82%,transparent);mask-image:linear-gradient(#000 82%,transparent)}
-  .js .panel-home{justify-content:flex-end}
   @media (max-width:720px){
-    .js body::before{height:44svh}
-    .js .panel-home{justify-content:flex-start;padding-top:calc(44svh - 40px)}
+    .js .stage{height:auto;min-height:calc(100svh - 190px)}
+    .js .panel{padding:28px 22px 14px}
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
@@ -568,7 +572,6 @@
         p.classList.remove("enter");
         if (on && animate) { void p.offsetWidth; p.classList.add("enter"); p.scrollTop = 0; }
       });
-      document.body.classList.toggle("is-home", name === "home");
       links.forEach(function(a){
         if (a.getAttribute("data-tab") === name && name !== "home") a.setAttribute("aria-current", "page");
         else a.removeAttribute("aria-current");
