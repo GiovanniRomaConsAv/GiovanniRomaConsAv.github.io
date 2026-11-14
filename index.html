@@ -297,6 +297,14 @@
     .js .stage{height:auto;min-height:calc(100svh - 190px)}
     .js .panel{padding:28px 22px 14px}
   }
+
+  /* Sliding nav indicator (JS only) */
+  .js header.top nav{position:relative}
+  .js header.top nav a::after{display:none}
+  .nav-ind{position:absolute;bottom:0;left:0;height:1px;width:0;background:var(--cobalt);opacity:0;pointer-events:none;
+    transition:transform .4s cubic-bezier(.16,1,.3,1),width .4s cubic-bezier(.16,1,.3,1),opacity .25s}
+  .nav-ind.on{opacity:1}
+  .nav-ind.snap{transition:none}
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
   }
@@ -577,6 +585,33 @@
         else a.removeAttribute("aria-current");
       });
     }
+
+    // Sliding underline: follows hover, rests on the current tab
+    var navEl = document.querySelector("header.top nav");
+    var ind = document.createElement("span"); ind.className = "nav-ind"; ind.setAttribute("aria-hidden","true");
+    navEl.appendChild(ind);
+    function moveTo(a, snap){
+      if (!a) { ind.classList.remove("on"); return; }
+      if (snap) ind.classList.add("snap");
+      ind.style.width = a.offsetWidth + "px";
+      ind.style.transform = "translateX(" + a.offsetLeft + "px)";
+      ind.classList.add("on");
+      if (snap) { void ind.offsetWidth; ind.classList.remove("snap"); }
+    }
+    var wasOn = false;
+    function rest(){
+      var cur = navEl.querySelector('[aria-current="page"]');
+      moveTo(cur, !wasOn && !!cur); wasOn = !!cur;
+    }
+    links.forEach(function(a){
+      a.addEventListener("mouseenter", function(){ moveTo(a, !wasOn); wasOn = true; });
+      a.addEventListener("focus", function(){ moveTo(a, !wasOn); wasOn = true; });
+      a.addEventListener("blur", rest);
+    });
+    navEl.addEventListener("mouseleave", rest);
+    window.addEventListener("resize", rest);
+    var _show = show;
+    show = function(n, an){ _show(n, an); rest(); };
     links.forEach(function(a){
       a.addEventListener("click", function(e){
         e.preventDefault();
@@ -588,6 +623,7 @@
     window.addEventListener("popstate", function(){ show(location.hash.slice(1), true); });
     window.addEventListener("hashchange", function(){ show(location.hash.slice(1), true); });
     show(location.hash.slice(1), true);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(rest);
 
     // Sub-tabs inside Projects
     var tabs = [].slice.call(document.querySelectorAll(".subtabs [data-sub]"));
