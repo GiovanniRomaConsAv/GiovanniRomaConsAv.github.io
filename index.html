@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Giovanni Roma</title>
 <meta name="description" content="Giovanni Roma — computer music designer, sound designer and sound engineer. Doctoral researcher at the Conservatorio «Domenico Cimarosa», Avellino.">
+<script>document.documentElement.className="js";</script>
 <style>
   :root{
     --cobalt:#0047AB;
@@ -163,37 +164,113 @@
     .hero-img{aspect-ratio:16/10}
     .roles{line-height:1.9}
   }
+
+  /* ===== Tabbed layout (applies only when JavaScript is running) ===== */
+  .js body{min-height:100svh;display:flex;flex-direction:column}
+  .js header.top{position:static}
+  .js main{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .js .stage{
+    position:relative;
+    height:clamp(540px,calc(100svh - 150px),720px);
+    max-width:900px;width:100%;margin:0 auto;
+  }
+  .js .panel{
+    position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
+    padding:34px 24px 20px;border-top:0;
+    display:flex;flex-direction:column;
+  }
+  .js .panel[hidden]{display:none}
+  .js .panel.enter{animation:panelIn .32s cubic-bezier(.16,1,.3,1) both}
+  @keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .js footer{padding:14px 0 18px}
+
+  header.top nav a{position:relative;padding:4px 0}
+  header.top nav a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--cobalt);
+    transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.16,1,.3,1);
+  }
+  header.top nav a:hover::after,header.top nav a[aria-current="page"]::after{transform:scaleX(1)}
+  header.top nav a[aria-current="page"]{color:var(--cobalt)}
+
+  /* Home */
+  .panel-home .hero{padding:0}
+  .panel-home .hero-img{flex:1;min-height:0;margin:26px 0 0;aspect-ratio:auto}
+  .js .panel-home h1{font-size:clamp(2.4rem,6vw,3.8rem)}
+  .js .panel-home .lead{margin-top:18px;font-size:1.15rem}
+  .js .panel-home .affil{margin-top:12px}
+
+  /* Work + images */
+  .wrap{max-width:900px}
+  .js .panel-work .areas{align-self:stretch}
+  .js .panel-work .area p{font-size:1.05rem}
+  .gallery .slot img{transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  .gallery .slot:hover img{transform:scale(1.025)}
+  .js .panel-images .gallery{margin:0}
+
+  /* Project sub-tabs */
+  .subtabs{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0 0 22px;padding-bottom:12px;border-bottom:1px solid var(--cobalt-line)}
+  .subtabs button{
+    font-family:var(--sans);font-size:.78rem;letter-spacing:.06em;background:none;border:0;cursor:pointer;
+    color:var(--muted);padding:4px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s;
+  }
+  .subtabs button:hover{color:var(--cobalt)}
+  .subtabs button[aria-selected="true"]{color:var(--cobalt);border-bottom-color:var(--cobalt);font-weight:600}
+  .subpanel[hidden]{display:none}
+  .subpanel.enter{animation:panelIn .28s cubic-bezier(.16,1,.3,1) both}
+  .js .subpanel .works li:first-child{border-top:0;padding-top:0}
+  .js .panel-selected .group{margin-top:0}
+  .js .panel-selected .credits{margin-top:20px;padding-top:18px}
+  .js .credit-card{min-height:13.5rem;padding:22px 26px 20px}
+
+
+  html:not(.js) .subtabs{display:none}
+  html:not(.js) section.panel{padding:56px 24px;border-top:1px solid var(--cobalt-line);max-width:900px;margin:0 auto}
+
+  header.top .mark{white-space:nowrap}
+  header.top .wrap{gap:14px}
+  @media (max-width:720px){
+    header.top nav{gap:12px}
+    header.top nav a{font-size:.74rem}
+    .js .stage{height:auto;min-height:calc(100svh - 150px)}
+    .js .panel{position:static;overflow:visible;padding:28px 24px 10px}
+    .js .panel-home .hero-img{flex:none;aspect-ratio:16/10}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+  }
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="#top">G. Roma</a>
+    <a class="mark" href="#home" data-tab="home">G. Roma</a>
     <nav aria-label="Sections">
-      <a href="#work">Work</a>
-      <a href="#selected">Projects</a>
-      <a href="#research">Research</a>
-      <a href="#contact">Contact</a>
+      <a href="#work" data-tab="work">Work</a>
+      <a href="#selected" data-tab="selected">Projects</a>
+      <a href="#research" data-tab="research">Research</a>
+      <a href="#images" data-tab="images">Images</a>
+      <a href="#contact" data-tab="contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<main id="top">
-  <div class="wrap">
+<main>
+  <div class="stage">
 
-    <div class="hero">
-      <p class="roles">Computer Music Designer<span>/</span>Sound Designer<span>/</span>Sound Engineer</p>
-      <h1>Giovanni Roma</h1>
-      <p class="lead">Working across audio engineering, live electronics and sound design for over thirty years, between the studio, the concert hall and the research laboratory.</p>
-      <p class="affil">Doctoral researcher, Conservatorio «Domenico Cimarosa», Avellino — AFAM doctoral programme, XL cycle</p>
-    </div>
+    <section class="panel panel-home" id="home" data-panel="home">
+      <div class="hero">
+        <p class="roles">Computer Music Designer<span>/</span>Sound Designer<span>/</span>Sound Engineer</p>
+        <h1>Giovanni Roma</h1>
+        <p class="lead">Working across audio engineering, live electronics and sound design for over thirty years, between the studio, the concert hall and the research laboratory.</p>
+        <p class="affil">Doctoral researcher, Conservatorio «Domenico Cimarosa», Avellino — AFAM doctoral programme, XL cycle</p>
+      </div>
+      <figure class="hero-img">
+        <img src="images/hero.jpg" alt="Blue mist over a coastal heath, with rocks in the foreground and headlands fading into the haze" width="1672" height="716">
+      </figure>
+    </section>
 
-    <figure class="hero-img">
-      <img src="images/hero.jpg" alt="Blue mist over a coastal heath, with rocks in the foreground and headlands fading into the haze" width="1672" height="716">
-    </figure>
-
-    <section id="work">
+    <section class="panel panel-work" id="work" data-panel="work" hidden>
       <h2>Work</h2>
       <div class="areas">
         <div class="area">
@@ -212,22 +289,20 @@
           <p>Mastering and audio engineering for third-party clients since 1996, on material of every kind and genre, with some thirty years of professional experience. Taught music post-production in professional schools (2014–2022).</p>
         </div>
       </div>
-      <!-- Draft descriptions: we will refine them together once the CV is in -->
-
-      <div style="margin-top:44px">
-        <h2 style="margin-bottom:18px">Selected images</h2>
-        <div class="gallery">
-          <figure class="slot sq"><img src="images/gallery-1.jpg" alt="Live electronics performance at night in front of a façade lit with geometric shadows" loading="lazy"></figure>
-          <figure class="slot sq"><img src="images/gallery-2.jpg" alt="Giovanni Roma speaking into a microphone beside a laptop, outdoors" loading="lazy"></figure>
-          <figure class="slot sq"><img src="images/gallery-3.jpg" alt="A hand on a lit grid controller in a live electronics setup" loading="lazy"></figure>
-        </div>
-      </div>
     </section>
 
-    <section id="selected">
+    <section class="panel panel-selected" id="selected" data-panel="selected" hidden>
       <h2>Selected projects</h2>
 
-      <div class="group">
+      <div class="subtabs" role="tablist" aria-label="Project categories">
+        <button type="button" role="tab" data-sub="live" aria-selected="true">Live electronics</button>
+        <button type="button" role="tab" data-sub="inst" aria-selected="false">Installations</button>
+        <button type="button" role="tab" data-sub="comp" aria-selected="false">Composition</button>
+        <button type="button" role="tab" data-sub="pub" aria-selected="false">Publications</button>
+        <button type="button" role="tab" data-sub="mast" aria-selected="false">Mastering &amp; credits</button>
+      </div>
+
+      <div class="subpanel group" data-subpanel="live">
         <h3>Computer music &amp; live electronics</h3>
         <ul class="works">
           <li><span class="yr">2023–</span><p><em>Interferenze</em>, Conservatorio «D. Cimarosa». Continuous work on the research and concert series: sound direction, algorithmic programming and technical coordination of the productions.</p></li>
@@ -236,7 +311,7 @@
         </ul>
       </div>
 
-      <div class="group">
+      <div class="subpanel group" data-subpanel="inst" hidden>
         <h3>Installations &amp; sound design</h3>
         <ul class="works">
           <li><span class="yr">2025–</span><p><em>Ecosistemi Sonori</em>, PRIN AFAM 2024. Design of the sound-diffusion system and of the sound-generation algorithms for an immersive sound garden.</p></li>
@@ -244,7 +319,7 @@
         </ul>
       </div>
 
-      <div class="group">
+      <div class="subpanel group" data-subpanel="comp" hidden>
         <h3>Composition</h3>
         <ul class="works">
           <li><span class="yr">2022–2023</span><p><em>El Aleph</em>, for piano and live electronics in quadraphony. Presented at the Festival del Barocco, Museo Archeologico Nazionale, Naples (2023).</p></li>
@@ -252,7 +327,7 @@
         </ul>
       </div>
 
-      <div class="group">
+      <div class="subpanel group" data-subpanel="pub" hidden>
         <h3>Publications</h3>
         <ul class="works">
           <li><span class="yr">2026</span><p>G. Roma, A. F. Battista, “Supervised Memory: How Machines Can Preserve What We Cannot Hold”, International Computer Music Conference (ICMC 2026), Hamburg.</p></li>
@@ -261,7 +336,7 @@
         </ul>
       </div>
 
-      <div class="group">
+      <div class="subpanel group" data-subpanel="mast" hidden>
         <h3>Mastering</h3>
         <ul class="works">
           <li><span class="yr">2019–2025</span><p>Mastering, mixing and editing for national and international releases on labels including Sony Music, BMG, Columbia, Elefant Records, peermusic and Artist First, with gold and platinum certified credits.</p></li>
@@ -290,7 +365,7 @@
       </div>
     </section>
 
-    <section id="research" class="research">
+    <section class="panel panel-research research" id="research" data-panel="research" hidden>
       <h2>Research</h2>
       <div class="research-grid">
         <img class="research-logo" src="images/aural-ia.svg" alt="Aural-IA — Computational Preservation Strategies for Electroacoustic Music" width="1446" height="1446">
@@ -298,12 +373,20 @@
           <h3>Aural-IA</h3>
           <p>My doctoral project investigates computational strategies for the preservation of electroacoustic music: works whose technological apparatus ages faster than the score that documents them, and which therefore call for methods of reconstruction, documentation and transmission suited to their nature.</p>
           <p>Case studies draw on works by Harvey, Stockhausen and Boulez; the methods combine supervised geometric annotation of scores, human-in-the-loop workflows and retrieval-augmented generation.</p>
-          <!-- Later: publications, conference papers -->
         </div>
       </div>
     </section>
 
-    <section id="contact">
+    <section class="panel panel-images" id="images" data-panel="images" hidden>
+      <h2>Selected images</h2>
+      <div class="gallery">
+        <figure class="slot sq"><img src="images/gallery-1.jpg" alt="Live electronics performance at night in front of a façade lit with geometric shadows" loading="lazy"></figure>
+        <figure class="slot sq"><img src="images/gallery-2.jpg" alt="Giovanni Roma speaking into a microphone beside a laptop, outdoors" loading="lazy"></figure>
+        <figure class="slot sq"><img src="images/gallery-3.jpg" alt="A hand on a lit grid controller in a live electronics setup" loading="lazy"></figure>
+      </div>
+    </section>
+
+    <section class="panel panel-contact" id="contact" data-panel="contact" hidden>
       <h2>Contact</h2>
       <p>For collaborations, teaching engagements and enquiries.</p>
 
@@ -312,7 +395,7 @@
           <button id="reveal" type="button" aria-live="polite">Show email address</button>
           <span id="mail-out" class="mail-out"></span>
         </p>
-        <noscript><p class="mail-out">giovanni.roma [at] conservatoriocimarosa [dot] org</p></noscript>
+        <noscript><p class="mail-out">Please enable JavaScript to show the email address.</p></noscript>
       </div>
 
       <ul class="links">
@@ -393,14 +476,13 @@
     box.hidden = false;
   })();
 
-  // The address is assembled only on click: it never appears in full in the HTML source,
-  // so crawlers that read the page without running scripts cannot harvest it.
+  // The address is never present in the page: it is rebuilt from numbers only after a click.
   (function(){
-    var parts = ["giovanni", "roma", "conservatoriocimarosa", "org"];
+    var k = [106, 117, 114, 49, 100, 118, 114, 117, 100, 112, 108, 102, 114, 108, 117, 114, 119, 100, 121, 117, 104, 118, 113, 114, 102, 67, 100, 112, 114, 117, 49, 108, 113, 113, 100, 121, 114, 108, 106];
     var btn = document.getElementById("reveal");
     var out = document.getElementById("mail-out");
     btn.addEventListener("click", function(){
-      var addr = parts[0] + "." + parts[1] + String.fromCharCode(64) + parts[2] + "." + parts[3];
+      var addr = k.slice().reverse().map(function(n){ return String.fromCharCode(n - 3); }).join("");
       var a = document.createElement("a");
       a.href = "mai" + "lto:" + addr;
       a.textContent = addr;
@@ -408,6 +490,53 @@
       btn.style.display = "none";
     });
     document.getElementById("y").textContent = new Date().getFullYear();
+  })();
+
+  // Tabs: the header links switch between panels of identical size.
+  (function(){
+    var panels = [].slice.call(document.querySelectorAll("[data-panel]"));
+    var links = [].slice.call(document.querySelectorAll("[data-tab]"));
+    var names = panels.map(function(p){ return p.getAttribute("data-panel"); });
+    function show(name, animate){
+      if (names.indexOf(name) < 0) name = "home";
+      panels.forEach(function(p){
+        var on = p.getAttribute("data-panel") === name;
+        p.hidden = !on;
+        p.classList.remove("enter");
+        if (on && animate) { void p.offsetWidth; p.classList.add("enter"); p.scrollTop = 0; }
+      });
+      links.forEach(function(a){
+        if (a.getAttribute("data-tab") === name && name !== "home") a.setAttribute("aria-current", "page");
+        else a.removeAttribute("aria-current");
+      });
+    }
+    links.forEach(function(a){
+      a.addEventListener("click", function(e){
+        e.preventDefault();
+        var n = a.getAttribute("data-tab");
+        if (history.pushState) history.pushState(null, "", "#" + n); else location.hash = n;
+        show(n, true);
+      });
+    });
+    window.addEventListener("popstate", function(){ show(location.hash.slice(1), true); });
+    window.addEventListener("hashchange", function(){ show(location.hash.slice(1), true); });
+    show(location.hash.slice(1), false);
+
+    // Sub-tabs inside Projects
+    var tabs = [].slice.call(document.querySelectorAll(".subtabs [data-sub]"));
+    var subs = [].slice.call(document.querySelectorAll("[data-subpanel]"));
+    function showSub(name){
+      subs.forEach(function(s){
+        var on = s.getAttribute("data-subpanel") === name;
+        s.hidden = !on; s.classList.remove("enter");
+        if (on) { void s.offsetWidth; s.classList.add("enter"); }
+      });
+      tabs.forEach(function(t){ t.setAttribute("aria-selected", t.getAttribute("data-sub") === name ? "true" : "false"); });
+    }
+    tabs.forEach(function(t){
+      t.addEventListener("click", function(){ showSub(t.getAttribute("data-sub")); });
+    });
+    showSub("live");
   })();
 </script>
 </body>
