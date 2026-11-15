@@ -356,7 +356,6 @@
       <a href="#selected" data-tab="selected">Projects</a>
       <a href="#research" data-tab="research">Research</a>
       <a href="#images" data-tab="images">Images</a>
-      <a href="#listen" data-tab="listen">Listen</a>
       <a href="#contact" data-tab="contact">Contact</a>
     </nav>
   </div>
@@ -407,6 +406,7 @@
         <button type="button" role="tab" data-sub="comp" aria-selected="false">Composition</button>
         <button type="button" role="tab" data-sub="pub" aria-selected="false">Publications</button>
         <button type="button" role="tab" data-sub="mast" aria-selected="false">Mastering &amp; credits</button>
+        <button type="button" role="tab" data-sub="listen" aria-selected="false">Listen</button>
       </div>
 
       <div class="subpanel group" data-subpanel="live">
@@ -472,6 +472,25 @@
           </div>
         </div>
       </div>
+
+      <div class="subpanel group" id="listen" data-subpanel="listen" hidden>
+        <h3>Listen</h3>
+        <p class="listen-intro">Indie, left-field music imprints whose catalogues I am involved in.</p>
+        <ul class="labels">
+          <li>
+            <p class="label-name"><a href="https://aquietbumplabel.bandcamp.com/" target="_blank" rel="noopener">AQuietBump<span class="arr" aria-hidden="true">&nbsp;↗</span></a></p>
+            <p class="label-meta">Campania · dub and downbeat imprint, est. 2005</p>
+          </li>
+          <li>
+            <p class="label-name"><a href="https://voolcanoharmonixrec.bandcamp.com/" target="_blank" rel="noopener">Voolcano Harmonix Rec.<span class="arr" aria-hidden="true">&nbsp;↗</span></a></p>
+            <p class="label-meta">Naples / London · jazz, trip hop and hip hop imprint, est. 2014</p>
+          </li>
+          <li>
+            <p class="label-name"><a href="https://bonaccia.bandcamp.com/" target="_blank" rel="noopener">Bonaccia<span class="arr" aria-hidden="true">&nbsp;↗</span></a></p>
+            <p class="label-meta">Campania · dub and downbeat imprint, est. 2026</p>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <section class="panel panel-research research" id="research" data-panel="research" hidden>
@@ -511,25 +530,6 @@
         <figure class="slot sq"><img src="images/gallery-3.jpg" alt="A hand on a lit grid controller in a live electronics setup" loading="lazy"></figure>
         <figure class="slot sq"><img src="images/gallery-4.jpg" alt="Giovanni Roma presenting at a conference, speaking into a microphone in front of a laptop" loading="lazy"></figure>
       </div>
-    </section>
-
-    <section class="panel panel-listen" id="listen" data-panel="listen" hidden>
-      <h2>Listen</h2>
-      <p class="listen-intro">Indie, left-field music imprints whose catalogues I am involved in.</p>
-      <ul class="labels">
-        <li>
-          <p class="label-name"><a href="https://aquietbumplabel.bandcamp.com/" target="_blank" rel="noopener">AQuietBump<span class="arr" aria-hidden="true">&nbsp;↗</span></a></p>
-          <p class="label-meta">Campania · dub and downbeat imprint, est. 2005</p>
-        </li>
-        <li>
-          <p class="label-name"><a href="https://voolcanoharmonixrec.bandcamp.com/" target="_blank" rel="noopener">Voolcano Harmonix Rec.<span class="arr" aria-hidden="true">&nbsp;↗</span></a></p>
-          <p class="label-meta">Naples / London · jazz, trip hop and hip hop imprint, est. 2014</p>
-        </li>
-        <li>
-          <p class="label-name"><a href="https://bonaccia.bandcamp.com/" target="_blank" rel="noopener">Bonaccia<span class="arr" aria-hidden="true">&nbsp;↗</span></a></p>
-          <p class="label-meta">Campania · dub and downbeat imprint, est. 2026</p>
-        </li>
-      </ul>
     </section>
 
     <section class="panel panel-contact" id="contact" data-panel="contact" hidden>
@@ -712,6 +712,10 @@
       t.addEventListener("click", function(){ showSub(t.getAttribute("data-sub")); });
     });
     showSub("live");
+    // Old links to #listen open Projects > Listen
+    function listenHash(){ if (location.hash === "#listen") { show("selected", true); showSub("listen"); } }
+    window.addEventListener("hashchange", listenHash);
+    listenHash();
   })();
 </script>
 </body>
