@@ -403,9 +403,9 @@
   <div class="wrap">
     <a class="mark" href="#home" data-tab="home">G. Roma</a>
     <nav aria-label="Sections">
-      <a href="#work" data-tab="work">Work</a>
       <a href="#selected" data-tab="selected">Projects</a>
       <a href="#research" data-tab="research">Research</a>
+      <a href="#work" data-tab="work">Roles</a>
       <a href="#images" data-tab="images">Images</a>
       <a href="#contact" data-tab="contact">Contact</a>
     </nav>
@@ -428,7 +428,7 @@
     </section>
 
     <section class="panel panel-work" id="work" data-panel="work" hidden>
-      <h2>Work</h2>
+      <h2>Roles</h2>
       <div class="areas">
         <div class="area">
           <span class="num">01</span>
@@ -452,35 +452,19 @@
       <h2>Selected projects</h2>
 
       <div class="subtabs" role="tablist" aria-label="Project categories">
-        <button type="button" role="tab" data-sub="live" aria-selected="true">Live electronics</button>
-        <button type="button" role="tab" data-sub="inst" aria-selected="false">Installations</button>
-        <button type="button" role="tab" data-sub="comp" aria-selected="false">Composition</button>
+        <button type="button" role="tab" data-sub="works" aria-selected="true">Works</button>
         <button type="button" role="tab" data-sub="pub" aria-selected="false">Publications</button>
-        <button type="button" role="tab" data-sub="mast" aria-selected="false">Mastering &amp; credits</button>
+        <button type="button" role="tab" data-sub="live" aria-selected="false">Live electronics</button>
+        <button type="button" role="tab" data-sub="mast" aria-selected="false">Post-production credits</button>
         <button type="button" role="tab" data-sub="listen" aria-selected="false">Listen</button>
       </div>
 
-      <div class="subpanel group" data-subpanel="live">
-        <h3>Computer music &amp; live electronics</h3>
-        <ul class="works">
-          <li><span class="yr">2023–</span><p><em>Interferenze</em>, Conservatorio «D. Cimarosa». Continuous work on the research and concert series: sound direction, algorithmic programming and technical coordination of the productions.</p></li>
-          <li><span class="yr">2022–</span><p><em>AuraLE</em>. A system for guided collective electroacoustic improvisation, developed at the Conservatorio and used in concerts and performances since 2022.</p></li>
-          <li><span class="yr">2021–</span><p>Electroacoustic Ensemble of the Conservatorio «D. Cimarosa». Electronic instrument building, algorithmic programming and live-electronics performance.</p></li>
-        </ul>
-      </div>
-
-      <div class="subpanel group" data-subpanel="inst" hidden>
-        <h3>Installations &amp; sound design</h3>
+      <div class="subpanel group" data-subpanel="works">
+        <h3>Installations, sound design &amp; composition</h3>
         <ul class="works">
           <li><span class="yr">2027</span><p><em>Crivello. Dove il vento ricorda</em>, sound installation: an overturned, perforated Istrian <em>batana</em> in which the wind decides from which side the voice speaks, and in which language. Winner of the 2nd MUR National Competition for a temporary installation for the Day of Remembrance; to be installed in 2027 in the gardens of the Venice Architecture Biennale. Concept, electronic design, construction and sound design by G. Roma with the doctoral students of the Conservatorio «D. Cimarosa».</p></li>
           <li><span class="yr">2025–</span><p><em>Ecosistemi Sonori</em>, PRIN AFAM 2024. Design of the sound-diffusion system and of the sound-generation algorithms for an immersive sound garden. Principal investigator: Prof. Alba Francesca Battista.</p></li>
           <li><span class="yr">2024</span><p><em>Trust</em>. Audiovisual installation, designed and built for FuturoRemoto, Museo Irpino, Avellino.</p></li>
-        </ul>
-      </div>
-
-      <div class="subpanel group" data-subpanel="comp" hidden>
-        <h3>Composition</h3>
-        <ul class="works">
           <li><span class="yr">2022–2023</span><p><em>El Aleph</em>, for piano and live electronics in quadraphony. Presented at the Festival del Barocco, Museo Archeologico Nazionale, Naples (2023).</p></li>
           <li><span class="yr">2022</span><p><em>PANopticon</em>, collective composition for saxophone and four electronics performers, for the Electroacoustic Ensemble of the Conservatorio.</p></li>
           <li><span class="yr">2021</span><p><em>Elaborazione di improvvisazioni di contrabbasso e sintetizzatore su canone Vuza 72 passi</em>, acousmatic composition: improvisations for double bass and synthesizer, processed on a 72-step Vuza canon.</p></li>
@@ -496,8 +480,17 @@
         </ul>
       </div>
 
+      <div class="subpanel group" data-subpanel="live" hidden>
+        <h3>Computer music &amp; live electronics</h3>
+        <ul class="works">
+          <li><span class="yr">2023–</span><p><em>Interferenze</em>, Conservatorio «D. Cimarosa». Continuous work on the research and concert series: sound direction, algorithmic programming and technical coordination of the productions.</p></li>
+          <li><span class="yr">2022–</span><p><em>AuraLE</em>. A system for guided collective electroacoustic improvisation, developed at the Conservatorio and used in concerts and performances since 2022.</p></li>
+          <li><span class="yr">2021–</span><p>Electroacoustic Ensemble of the Conservatorio «D. Cimarosa». Electronic instrument building, algorithmic programming and live-electronics performance.</p></li>
+        </ul>
+      </div>
+
       <div class="subpanel group" data-subpanel="mast" hidden>
-        <h3>Mastering</h3>
+        <h3>Post-production credits</h3>
         <ul class="works">
           <li><span class="yr">2001–2026</span><p>Mastering, mixing and editing for national and international releases on labels including Sony Music, BMG, Columbia, Elefant Records, peermusic and Artist First, with gold and platinum certified credits.</p></li>
         </ul>
@@ -762,7 +755,7 @@
     tabs.forEach(function(t){
       t.addEventListener("click", function(){ showSub(t.getAttribute("data-sub")); });
     });
-    showSub("live");
+    showSub("works");
     // Old links to #listen open Projects > Listen
     function listenHash(){ if (location.hash === "#listen") { show("selected", true); showSub("listen"); } }
     window.addEventListener("hashchange", listenHash);
