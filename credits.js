@@ -55,7 +55,7 @@ window.CREDITS = [
   "roles": [
    "Mastering"
   ],
-  "note": "Film by E. De Angelis, in competition at Venice 83"
+  "note": "Film by E. De Angelis, in competition at Venice 83. Soundtrack Stars Award 2026 for the score by La Niña and Alfredo Maddaluno."
  },
  {
   "y": 2025,
@@ -88,7 +88,7 @@ window.CREDITS = [
   "roles": [
    "Mastering"
   ],
-  "note": ""
+  "note": "Debut album; finalist for Best Debut Album, Targhe Tenco 2026"
  },
  {
   "y": 2025,
@@ -99,7 +99,7 @@ window.CREDITS = [
   "roles": [
    "Mastering"
   ],
-  "note": "Targa Tenco 2025"
+  "note": "Targa Tenco 2025, Best Album in Dialect"
  },
  {
   "y": 2025,
@@ -146,7 +146,7 @@ window.CREDITS = [
    "Mastering",
    "Editing"
   ],
-  "note": ""
+  "note": "Soundtrack of the film VAS by Gianmaria Fiorillo; limited-edition LP presented at Kagoshima Records, Naples"
  },
  {
   "y": 2024,
@@ -344,7 +344,7 @@ window.CREDITS = [
  {
   "y": 2021,
   "artist": "Gnut e Sollo",
-  "title": "L’orso ’nammurato (Live)",
+  "title": "L’orso ’nnammurato (Live)",
   "fmt": "LP",
   "label": "AedeM",
   "roles": [
@@ -461,7 +461,7 @@ window.CREDITS = [
    "Mixing",
    "Editing"
   ],
-  "note": "The rapper’s first album for a major label; feat. Jake La Furia, Nina Zilli, Clementino"
+  "note": "Feat. Jake La Furia, Nina Zilli, Clementino"
  },
  {
   "y": 2020,
@@ -914,7 +914,7 @@ window.CREDITS = [
   "roles": [
    "Mastering"
   ],
-  "note": "Greek singer-songwriter album; includes a song by Rino Gaetano"
+  "note": ""
  },
  {
   "y": 2015,
@@ -926,7 +926,7 @@ window.CREDITS = [
    "Mastering",
    "Mixing"
   ],
-  "note": "Feat. Marco Zurzolo, Monica Sarnelli, Capone & BungtBangt, DJ Jad, Valerio Jovine"
+  "note": "Feat. Monica Sarnelli, Capone & BungtBangt, DJ Jad,"
  },
  {
   "y": 2015,
@@ -1005,7 +1005,7 @@ window.CREDITS = [
   "roles": [
    "Mastering"
   ],
-  "note": "Includes “Nuje vulimme ’na speranza”, the closing theme of Gomorra – La serie (Sky/Cattleya)"
+  "note": "Includes “Nuje vulimme ’na speranza”, the closing theme of Gomorra – (Sky/Cattleya)"
  },
  {
   "y": 2014,
@@ -1100,7 +1100,7 @@ window.CREDITS = [
    "Mastering",
    "Mixing"
   ],
-  "note": "Major-label debut album; prod. Fabio Musta, Shablo, Fritz da Cat"
+  "note": "Major-label debut album; prod. Shablo, Fritz da Cat"
  },
  {
   "y": 2013,
@@ -1174,7 +1174,7 @@ window.CREDITS = [
   "roles": [
    "Mastering"
   ],
-  "note": "Feat. DJ Gruff, Speaker Cenzou; drums by Ciccio Merolla"
+  "note": "Feat. DJ Gruff, Speaker Cenzou"
  },
  {
   "y": 2011,
@@ -1348,7 +1348,7 @@ window.CREDITS = [
   "roles": [
    "Mastering"
   ],
-  "note": "Avant-garde / jazz-rock album; with Paolo Del Vecchio and Michele Acanfora"
+  "note": "Feat. Paolo Del Vecchio and Michele Acanfora"
  },
  {
   "y": 2008,
@@ -1417,6 +1417,17 @@ window.CREDITS = [
    "Mixing"
   ],
   "note": ""
+ },
+ {
+  "y": 2007,
+  "artist": "AA.VV.",
+  "title": "Mediaterrae Vol.1 – Irpinia Electronic Landscape",
+  "fmt": "DVD",
+  "label": "GAL Verde Irpinia / Media Terrae",
+  "roles": [
+   "Mastering"
+  ],
+  "note": "Audio mastering of the whole DVD, distributed with Blow Up magazine. Artist residency and live event, Irpinia, February 2007"
  },
  {
   "y": 2005,
