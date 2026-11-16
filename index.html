@@ -410,16 +410,11 @@
   .labels .label-name a{color:#0A2A6B;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .25s,color .25s}
   .labels .label-name a:hover,.labels .label-name a:focus-visible{border-bottom-color:#D49A2A;color:var(--cobalt)}
   .labels .arr{font-family:var(--sans);font-size:.72em;color:var(--cobalt);opacity:.7}
-    /* Cursor light: the background brightens softly where the pointer passes (fine pointers only) */
-  .js body::after{
-    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .7s ease;
-    background:radial-gradient(560px circle at var(--mx,50%) var(--my,40%),rgba(255,255,255,.62),rgba(255,255,255,.22) 42%,rgba(255,255,255,0) 70%);
-  }
+    /* Cursor light: a soft highlight follows the pointer inside the glass panel (fine pointers only) */
   .js .stage{
-    background-image:radial-gradient(460px circle at var(--sx,-999px) var(--sy,-999px),rgba(255,255,255,calc(.42 * var(--lit,0))),rgba(255,255,255,0) 70%);
+    background-image:radial-gradient(460px circle at var(--sx,-999px) var(--sy,-999px),rgba(255,255,255,calc(.5 * var(--lit,0))),rgba(255,255,255,0) 70%);
   }
-  .js body.lit::after{opacity:1}
-  @media (prefers-reduced-motion:reduce){.js body::after{display:none}.js .stage{background-image:none}}
+  @media (prefers-reduced-motion:reduce){.js .stage{background-image:none}}
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
   }
@@ -822,31 +817,28 @@
     listenHash();
   })();
 
-  // Cursor light: eases a soft highlight toward the pointer; skipped on touch and reduced motion.
+  // Cursor light: eases a soft highlight toward the pointer inside the glass panel; skipped on touch and reduced motion.
   (function(){
     if (!window.matchMedia) return;
     if (!matchMedia("(hover:hover) and (pointer:fine)").matches) return;
     if (matchMedia("(prefers-reduced-motion:reduce)").matches) return;
-    var root = document.documentElement, body = document.body, stage = document.querySelector(".stage");
+    var stage = document.querySelector(".stage");
+    if (!stage) return;
     var tx = innerWidth / 2, ty = innerHeight * .4, x = tx, y = ty, lit = 0, target = 0, raf = 0;
     function frame(){
       x += (tx - x) * .12; y += (ty - y) * .12; lit += (target - lit) * .08;
-      root.style.setProperty("--mx", x.toFixed(1) + "px");
-      root.style.setProperty("--my", y.toFixed(1) + "px");
-      if (stage) {
-        var r = stage.getBoundingClientRect();
-        stage.style.setProperty("--sx", (x - r.left).toFixed(1) + "px");
-        stage.style.setProperty("--sy", (y - r.top).toFixed(1) + "px");
-        stage.style.setProperty("--lit", lit.toFixed(3));
-      }
+      var r = stage.getBoundingClientRect();
+      stage.style.setProperty("--sx", (x - r.left).toFixed(1) + "px");
+      stage.style.setProperty("--sy", (y - r.top).toFixed(1) + "px");
+      stage.style.setProperty("--lit", lit.toFixed(3));
       var moving = Math.abs(tx - x) > .3 || Math.abs(ty - y) > .3 || Math.abs(target - lit) > .004;
       raf = moving ? requestAnimationFrame(frame) : 0;
     }
     function kick(){ if (!raf) raf = requestAnimationFrame(frame); }
-    function off(){ target = 0; body.classList.remove("lit"); kick(); }
+    function off(){ target = 0; kick(); }
     window.addEventListener("pointermove", function(e){
       if (e.pointerType && e.pointerType !== "mouse") return;
-      tx = e.clientX; ty = e.clientY; target = 1; body.classList.add("lit"); kick();
+      tx = e.clientX; ty = e.clientY; target = 1; kick();
     }, {passive:true});
     document.addEventListener("mouseleave", off);
     document.documentElement.addEventListener("mouseleave", off);
