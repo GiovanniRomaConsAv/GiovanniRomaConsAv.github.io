@@ -174,8 +174,8 @@
   .credit-card.swap{opacity:0}
   .credit-card:focus{outline:2px solid var(--cobalt);outline-offset:2px}
   .credit-card p{margin:0}
-  .cc-year{font-size:2.2rem;line-height:1;color:var(--cobalt);letter-spacing:-.01em}
-  .cc-artist{margin-top:14px;font-size:1.25rem;line-height:1.35;color:var(--ink)}
+  .cc-y{color:var(--muted);font-weight:400}
+  .cc-artist{margin-top:0;font-size:1.25rem;line-height:1.35;color:var(--ink)}
   .cc-title{margin-top:2px;font-style:italic;font-size:1.15rem;line-height:1.4;color:var(--cobalt)}
   .cc-meta{margin-top:14px;font-family:var(--sans);font-size:.84rem;line-height:1.5;color:var(--muted)}
   .cc-role{margin-top:6px;font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt);font-weight:600}
@@ -282,7 +282,7 @@
   .js .subpanel .works li:first-child{border-top:0;padding-top:0}
   .js .panel-selected .group{margin-top:0}
   .js .panel-selected .credits{margin-top:20px;padding-top:18px}
-  .js .credit-card{min-height:13.5rem;padding:22px 26px 20px}
+  .js .credit-card{min-height:11.5rem;padding:22px 26px 20px}
 
 
   html:not(.js) .subtabs{display:none}
@@ -343,9 +343,9 @@
   }
   .js .panel{padding:32px 64px 20px}
   .js .panel-images .gallery{max-width:min(600px,calc(clamp(520px,calc(100svh - 190px),700px) - 175px))}
-  .js .credit-card{min-height:12.5rem;padding:18px 26px 16px}
-  @media (max-width:900px){.js .credit-card{min-height:14rem}}
-  @media (max-width:720px){.js .credit-card{min-height:20.5rem}}
+  .js .credit-card{min-height:11.5rem;padding:18px 26px 16px}
+  @media (max-width:900px){.js .credit-card{min-height:11.5rem}}
+  @media (max-width:720px){.js .credit-card{min-height:18.75rem}}
   .js .panel-selected .credits{margin-top:14px;padding-top:14px}
   .js .panel-home{justify-content:center}
   @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
@@ -526,7 +526,6 @@
             <select id="credit-year"></select>
           </div>
           <article class="credit-card" id="credit-card" aria-live="polite" tabindex="0">
-            <p class="cc-year" id="cc-year"></p>
             <p class="cc-artist" id="cc-artist"></p>
             <p class="cc-title" id="cc-title"></p>
             <p class="cc-meta" id="cc-meta"></p>
@@ -645,7 +644,7 @@
     var next = document.getElementById("credit-next");
     var count = document.getElementById("credit-count");
     var el = {
-      y: document.getElementById("cc-year"), a: document.getElementById("cc-artist"),
+      a: document.getElementById("cc-artist"),
       t: document.getElementById("cc-title"), m: document.getElementById("cc-meta"),
       r: document.getElementById("cc-role"), n: document.getElementById("cc-note")
     };
@@ -661,8 +660,9 @@
 
     function paint(){
       var c = list[i];
-      el.y.textContent = c.y;
-      el.a.textContent = c.artist;
+      el.a.textContent = c.artist + " ";
+      var yy = document.createElement("span"); yy.className = "cc-y"; yy.textContent = "(" + c.y + ")";
+      el.a.appendChild(yy);
       el.t.textContent = c.title;
       el.m.textContent = [c.fmt, c.label].filter(Boolean).join("  ·  ");
       el.r.textContent = c.roles.join(" · ");
