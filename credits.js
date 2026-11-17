@@ -4,6 +4,18 @@ window.HIDE_ARTISTS = [];
 window.CREDITS = [
  {
   "y": 2026,
+  "artist": "Pellegrino & Zodyaco",
+  "title": "Napoletana",
+  "fmt": "Single · Digital",
+  "label": "Early Sounds Recordings",
+  "roles": [
+   "Mastering",
+   "Mixing"
+  ],
+  "note": ""
+ },
+   {
+  "y": 2026,
   "artist": "DESSAI (Stefano Bruno)",
   "title": "72 Ore",
   "fmt": "Digital",
@@ -56,6 +68,18 @@ window.CREDITS = [
    "Mastering"
   ],
   "note": "Film by E. De Angelis, in competition at Venice 83. Soundtrack Stars Award 2026 for the score by La Niña and Alfredo Maddaluno."
+ },
+    {
+  "y": 2025,
+  "artist": "Pellegrino & Zodyaco",
+  "title": "Koinè",
+  "fmt": "LP · Digital",
+  "label": "Early Sounds Recordings — EAS 025",
+  "roles": [
+   "Mastering",
+   "Mixing"
+  ],
+  "note": ""
  },
  {
   "y": 2025,
@@ -148,6 +172,18 @@ window.CREDITS = [
   ],
   "note": "Soundtrack of the film VAS by Gianmaria Fiorillo; limited-edition LP presented at Kagoshima Records, Naples"
  },
+    {
+  "y": 2024,
+  "artist": "Pellegrino & Zodyaco",
+  "title": "Saditè",
+  "fmt": "Single · Digital",
+  "label": "Early Sounds Recordings",
+  "roles": [
+   "Mastering",
+   "Mixing"
+  ],
+  "note": ""
+ },
  {
   "y": 2024,
   "artist": "Verdero",
@@ -215,6 +251,18 @@ window.CREDITS = [
   ],
   "note": ""
  },
+    {
+  "y": 2023,
+  "artist": "Pellegrino & Zodyaco",
+  "title": "Malìa",
+  "fmt": "7″ · Digital",
+  "label": "Early Sounds Recordings — EASERIE7-03",
+  "roles": [
+   "Mastering",
+   "Mixing"
+  ],
+  "note": ""
+ },
  {
   "y": 2023,
   "artist": "Golden Rain",
@@ -267,6 +315,18 @@ window.CREDITS = [
   "label": "Artist First",
   "roles": [
    "Mastering"
+  ],
+  "note": ""
+ },
+    {
+  "y": 2022,
+  "artist": "Pellegrino & Zodyaco",
+  "title": "Quimere",
+  "fmt": "7″ · Digital",
+  "label": "Early Sounds Recordings — EASERIE7-02",
+  "roles": [
+   "Mastering",
+   "Mixing"
   ],
   "note": ""
  },
@@ -411,6 +471,17 @@ window.CREDITS = [
    "Composition",
    "Arrangement",
    "Mixing",
+   "Mastering"
+  ],
+  "note": ""
+ },
+    {
+  "y": 2020,
+  "artist": "Pellegrino pres. Zodyaco",
+  "title": "Caucciù",
+  "fmt": "7″ · Digital",
+  "label": "Early Sounds Recordings — EAS 022-7",
+  "roles": [
    "Mastering"
   ],
   "note": ""
