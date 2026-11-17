@@ -184,11 +184,11 @@
   .credits-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
   .credits-nav button{
     font-family:var(--sans);font-size:.85rem;letter-spacing:.04em;cursor:pointer;
-    padding:9px 16px;background:transparent;border:1px solid var(--cobalt);color:var(--cobalt);
+    padding:9px 16px;background:var(--paper);border:1px solid var(--cobalt);color:var(--cobalt);
     transition:background .15s,color .15s;
   }
   .credits-nav button:hover:not(:disabled){background:var(--cobalt);color:#fff}
-  .credits-nav button:disabled{opacity:.35;cursor:default}
+  .credits-nav button:disabled{color:rgba(0,71,171,.35);border-color:rgba(0,71,171,.35);cursor:default}
   #credit-count{font-family:var(--sans);font-size:.8rem;color:var(--muted);letter-spacing:.06em}
 
   /* Contact */
